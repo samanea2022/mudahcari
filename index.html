@@ -380,11 +380,12 @@
                 <table class="results-table" id="resultsTable" style="display: none;">
                     <thead>
                         <tr>
-                            <th width="20%">SAP编码</th>
+                            <th width="15%">SAP编码</th> <!-- 宽度可微调 -->
                             <th width="25%">货物名称</th>
-                            <th width="15%">仓库位置</th>
+                            <th width="30%">产品描述</th> <!-- 新增 -->
+                            <th width="10%">单位</th>     <!-- 新增 -->
                             <th width="15%">库存数量</th>
-                            <th width="25%">状态</th>
+                            <th width="15%">存放位置</th>
                         </tr>
                     </thead>
                     <tbody id="resultsBody">
@@ -450,7 +451,7 @@
                 // 1. 执行Supabase查询（关键步骤）
                 const { data, error } = await supabaseClient
                     .from('products') // 请确保你的表名是 'products'
-                    .select('sap_code, product_name, location, quantity, status') // 选择你的字段
+                    .select('sap_code, product_name, product_description, unit, location, quantity') // 选择你的字段
                     .eq('sap_code', sapCode); // 按sap_code精确查询
 
                 // 2. 检查查询错误
@@ -492,9 +493,10 @@
                 row.innerHTML = `
                     <td class="sap-code">${item.sap_code || ''}</td>
                     <td>${item.product_name || ''}</td>
+                    <td>${item.product_description || ''}</td>
+                    <td>${item.unit || ''}</td>
+                    <td class="quantity">${item.quantity || 0} </td>
                     <td><span class="location">${item.location || ''}</span></td>
-                    <td class="quantity">${item.quantity || 0} 件</td>
-                    <td><span class="status ${item.status || 'out-of-stock'}">${statusText[item.status] || '未知状态'}</span></td>
                 `;
                 resultsBody.appendChild(row);
             });
