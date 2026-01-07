@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仓库货物位置查询系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sap-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .input-container {
+                flex-direction: row;
+                align-items: center;
+            }
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid #e1e5eb;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .search-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+        }
+
+        .search-btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .results-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .results-header {
+            padding: 20px 25px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .results-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .results-count {
+            background-color: #3498db;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .results-container {
+            padding: 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 60px 20px;
+            color: #e74c3c;
+        }
+
+        .error-message i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .results-table th {
+            background-color: #f8f9fa;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 2px solid #e1e5eb;
+        }
+
+        .results-table td {
+            padding: 18px 15px;
+            border-bottom: 1px solid #e1e5eb;
+        }
+
+        .results-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .sap-code {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .location {
+            display: inline-block;
+            padding: 6px 15px;
+            background-color: #e8f4fc;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #2980b9;
+        }
+
+        .quantity {
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .status.in-stock {
+            background-color: #d5f4e6;
+            color: #27ae60;
+        }
+
+        .status.low-stock {
+            background-color: #fef9e7;
+            color: #f39c12;
+        }
+
+        .status.out-of-stock {
+            background-color: #fdebd0;
+            color: #e67e22;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .search-section {
+                padding: 20px;
+            }
+
+            .results-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .results-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            input[type="text"], .search-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 12px 10px;
+                font-size: 0.9rem;
+            }
+
+            .location, .status {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-warehouse"></i> 仓库货物位置查询系统</h1>
+            <p>输入SAP编码快速查询货物在仓库中的位置和库存信息</p>
+        </header>
+
+        <section class="search-section">
+            <div class="input-group">
+                <div class="sap-label">SAP编码</div>
+                <div class="input-container">
+                    <input type="text" id="sapCode" placeholder="请输入SAP编码，例如：MAT-2023-001" autocomplete="off">
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i> 查询货物位置
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div class="results-header">
+                <h2><i class="fas fa-list-alt"></i> 查询结果</h2>
+                <div class="results-count" id="resultsCount">共 0 条记录</div>
+            </div>
+
+            <div class="results-container" id="resultsContainer">
+                <!-- 初始状态显示提示信息 -->
+                <div class="no-results" id="initialMessage">
+                    <i class="fas fa-search"></i>
+                    <h3>请输入SAP编码进行查询</h3>
+                    <p>系统将显示货物在仓库中的所有位置和库存信息</p>
+                </div>
+
+                <!-- 加载状态 -->
+                <div class="loading" id="loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p>正在查询货物位置信息...</p>
+                </div>
+
+                <!-- 无结果状态 -->
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-box-open"></i>
+                    <h3>未找到相关货物信息</h3>
+                    <p>请检查SAP编码是否正确，或联系仓库管理员</p>
+                </div>
+
+                <!-- 错误状态 -->
+                <div class="error-message" id="errorMessage" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>查询失败</h3>
+                    <p id="errorText">服务器连接失败，请稍后重试</p>
+                </div>
+
+                <!-- 查询结果表格 -->
+                <table class="results-table" id="resultsTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th width="20%">SAP编码</th>
+                            <th width="25%">货物名称</th>
+                            <th width="15%">仓库位置</th>
+                            <th width="15%">库存数量</th>
+                            <th width="25%">状态</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody">
+                        <!-- 结果将通过JavaScript动态添加 -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>仓库货物位置查询系统 &copy; 2023 | 数据来源于服务器数据库</p>
+        </footer>
+    </div>
+
+    <script>
+        // DOM元素
+        const sapCodeInput = document.getElementById('sapCode');
+        const searchBtn = document.getElementById('searchBtn');
+        const resultsCount = document.getElementById('resultsCount');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const initialMessage = document.getElementById('initialMessage');
+        const loading = document.getElementById('loading');
+        const noResults = document.getElementById('noResults');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const resultsTable = document.getElementById('resultsTable');
+        const resultsBody = document.getElementById('resultsBody');
+
+        // 服务器API地址 - 请根据实际情况修改
+        const API_BASE_URL = 'https://your-server.com/api'; // 替换为您的服务器地址
+        const SEARCH_API = `${API_BASE_URL}/search`;
+
+        // 状态文本映射
+        const statusText = {
+            "in-stock": "库存充足",
+            "low-stock": "库存不足",
+            "out-of-stock": "无库存"
+        };
+
+        // 搜索功能 - 从服务器获取数据
+        async function searchGoods() {
+            const sapCode = sapCodeInput.value.trim().toUpperCase();
+
+            // 验证输入
+            if (!sapCode) {
+                alert("请输入SAP编码");
+                sapCodeInput.focus();
+                return;
+            }
+
+            // 显示加载状态，禁用按钮
+            initialMessage.style.display = 'none';
+            noResults.style.display = 'none';
+            errorMessage.style.display = 'none';
+            resultsTable.style.display = 'none';
+            loading.style.display = 'block';
+            searchBtn.disabled = true;
+
+            try {
+                // 调用服务器API
+                const response = await fetch(SEARCH_API, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        sapCode: sapCode
+                    })
+                });
+
+                // 检查响应状态
+                if (!response.ok) {
+                    throw new Error(`服务器返回错误: ${response.status}`);
+                }
+
+                // 解析响应数据
+                const data = await response.json();
+
+                // 隐藏加载状态，启用按钮
+                loading.style.display = 'none';
+                searchBtn.disabled = false;
+
+                // 更新结果计数
+                resultsCount.textContent = `共 ${data.length || 0} 条记录`;
+
+                if (!data || data.length === 0) {
+                    // 无结果
+                    noResults.style.display = 'block';
+                } else {
+                    // 显示结果表格
+                    renderResults(data);
+                    resultsTable.style.display = 'table';
+                    resultsTable.classList.add('fade-in');
+                }
+
+            } catch (error) {
+                // 处理错误
+                console.error('查询失败:', error);
+
+                // 隐藏加载状态，启用按钮
+                loading.style.display = 'none';
+                searchBtn.disabled = false;
+
+                // 显示错误信息
+                errorText.textContent = `查询失败: ${error.message}`;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        // 渲染结果
+        function renderResults(results) {
+            // 清空之前的结果
+            resultsBody.innerHTML = '';
+
+            // 添加新结果
+            results.forEach(item => {
+                const row = document.createElement('tr');
+                row.classList.add('fade-in');
+
+                row.innerHTML = `
+                    <td class="sap-code">${item.sapCode || ''}</td>
+                    <td>${item.name || ''}</td>
+                    <td><span class="location">${item.location || ''}</span></td>
+                    <td class="quantity">${item.quantity || 0} 件</td>
+                    <td><span class="status ${item.status || 'out-of-stock'}">${statusText[item.status] || '未知状态'}</span></td>
+                `;
+
+                resultsBody.appendChild(row);
+            });
+        }
+
+        // 事件监听
+        searchBtn.addEventListener('click', searchGoods);
+
+        // 按Enter键也可以搜索
+        sapCodeInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                searchGoods();
+            }
+        });
+
+        // 页面加载时自动聚焦输入框
+        window.addEventListener('load', function() {
+            sapCodeInput.focus();
+        });
+
+        // 输入框选中文本功能
+        sapCodeInput.addEventListener('focus', function() {
+            this.select();
+        });
+
+        // 示例数据 - 仅用于演示（实际使用时删除此部分）
+        function showDemoData() {
+            // 这里仅用于演示API格式
+            console.log("API响应数据示例格式:");
+            console.log([
+                {
+                    sapCode: "MAT-2023-001",
+                    name: "电子元件A型",
+                    location: "A区-1排-3层",
+                    quantity: 125,
+                    status: "in-stock"
+                },
+                {
+                    sapCode: "MAT-2023-001",
+                    name: "电子元件A型",
+                    location: "B区-5排-2层",
+                    quantity: 80,
+                    status: "in-stock"
+                }
+            ]);
+        }
+
+        // 页面加载完成后显示示例格式
+        window.addEventListener('load', showDemoData);
+    </script>
+</body>
+</html>
