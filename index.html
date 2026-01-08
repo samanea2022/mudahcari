@@ -503,11 +503,12 @@
                 // 注意：这里使用的字段名与你数据库的字段名完全一致
                 row.innerHTML = `
                     <td class="sap-code">${item.sap_code || ''}</td>
-                    <td>${item.product_name || ''}</td>
-                    <td>${item.product_description || ''}</td>
                     <td>${item.unit || ''}</td>
                     <td class="quantity">${item.quantity || 0} </td>
                     <td><span class="location">${item.location || ''}</span></td>
+                    <td>${item.product_name || ''}</td>
+                    <td>${item.product_description || ''}</td>
+
                 `;
                 resultsBody.appendChild(row);
             });
