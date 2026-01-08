@@ -156,12 +156,10 @@
             font-size: 0.9rem;
         }
 
-        .results-container {
-            padding: 0;
-            /* 新增以下三行代码 */
-            overflow-x: auto; /* 允许横向滚动 */
-            -webkit-overflow-scrolling: touch; /* 让手机滚动更顺滑 */
-            max-width: 100%; /* 确保容器不超过屏幕宽度 */
+        #resultsContainer.results-container {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            display: block;
         }
 
         .loading {
@@ -384,12 +382,12 @@
                 <table class="results-table" id="resultsTable" style="display: none;">
                     <thead>
                         <tr>
-                            <th width="15%">SAP编码</th> <!-- 宽度可微调 -->
-                            <th width="25%">货物名称</th>
-                            <th width="30%">产品描述</th> <!-- 新增 -->
-                            <th width="10%">单位</th>     <!-- 新增 -->
-                            <th width="15%">库存数量</th>
-                            <th width="15%">存放位置</th>
+                            <th>SAP编码</th>
+                            <th>货物名称</th>
+                            <th>产品描述</th>
+                            <th>单位</th>
+                            <th>库存数量</th>
+                            <th>存放位置</th>
                         </tr>
                     </thead>
                     <tbody id="resultsBody">
