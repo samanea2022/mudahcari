@@ -192,23 +192,32 @@
             margin-bottom: 20px;
         }
 
-        .results-table {
+        /* 为表格设置一个绝对最小宽度，这是横向滚动的关键 */
+        #resultsTable.results-table {
+            min-width: 800px !important; /* 根据你的7列内容，可能需要850px或更多，请调整 */
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed; /* 使用固定布局，列宽由CSS明确指定，防止变形 */
         }
 
-        .results-table th {
-            background-color: #f8f9fa;
-            padding: 18px 15px;
+        /* 固定表头各列的宽度比例 (根据你原来的设定微调) */
+        #resultsTable.results-table th:nth-child(1) { width: 12%; } /* SAP编码 */
+        #resultsTable.results-table th:nth-child(2) { width: 18%; } /* 货物名称 */
+        #resultsTable.results-table th:nth-child(3) { width: 25%; } /* 产品描述 */
+        #resultsTable.results-table th:nth-child(4) { width: 8%;  } /* 单位 */
+        #resultsTable.results-table th:nth-child(5) { width: 12%; } /* 库存数量 */
+        #resultsTable.results-table th:nth-child(6) { width: 15%; } /* 存放位置 */
+        #resultsTable.results-table th:nth-child(7) { width: 10%; } /* 状态 */
+
+        /* 确保单元格内容正常换行，不撑开 */
+        #resultsTable.results-table td,
+        #resultsTable.results-table th {
+            word-wrap: break-word; /* 允许长单词断行 */
+            overflow-wrap: break-word; /* 更现代的标准 */
+            padding: 12px 8px; /* 调整内边距，让布局更紧凑 */
             text-align: left;
-            font-weight: 600;
-            color: #2c3e50;
-            border-bottom: 2px solid #e1e5eb;
-        }
-
-        .results-table td {
-            padding: 18px 15px;
             border-bottom: 1px solid #e1e5eb;
+            vertical-align: top; /* 内容顶部对齐，避免高度不一 */
         }
 
         .results-table tr:hover {
