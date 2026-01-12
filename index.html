@@ -377,6 +377,16 @@
         .fade-in {
             animation: fadeIn 0.5s ease-out;
         }
+
+        /* 位置2的样式 - 独立区域 */
+        .data-status-section {
+            background: #e8f4fc;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -388,9 +398,17 @@
                 <button class="lang-btn" data-lang="id">Bahasa Indonesia</button>
             </div>
 
-            <h1><i class="fas fa-warehouse"></i> <span data-i18n="title">仓库货物位置查询系统</span></h1>
+            <h1><i class="fas fa-warehouse"></i> <span data-i18n="title">仓库货位速查</span></h1>
             <p><span data-i18n="subtitle">输入SAP编码快速查询货物在仓库中的位置和库存信息</span></p>
+
         </header>
+
+        <!-- 在search-section上方添加新section -->
+        <section class="data-status-section">
+            <div class="container">
+                <p><i class="fas fa-database"></i> <span data-i18n="updateText">数据最后更新于:  </span><strong id="lastUpdateTime">2025-01-10 20:30</strong> </p>
+            </div>
+        </section>
 
         <section class="search-section">
             <div class="input-group">
@@ -398,7 +416,7 @@
                 <div class="input-container">
                     <input type="text" id="sapCode" placeholder="" autocomplete="off" data-placeholder-zh="请输入SAP编码，例如:4002010000" data-placeholder-id="Masukkan kode SAP, contoh: 4002010000">
                     <button class="search-btn" id="searchBtn">
-                        <i class="fas fa-search"></i> <span data-i18n="searchButton">查询货物位置</span>
+                        <i class="fas fa-search"></i> <span data-i18n="searchButton">点击查询</span>
                     </button>
                 </div>
             </div>
@@ -407,7 +425,7 @@
         <section class="results-section">
             <div class="results-header">
                 <h2><i class="fas fa-list-alt"></i> <span data-i18n="resultsTitle">查询结果</span></h2>
-                <div class="results-count" id="resultsCount"><span data-i18n="resultsCount">共 0 条记录</span></div>
+                <div class="results-count" id="resultsCount" data-i18n="resultsCount">共 0 条记录</div>
             </div>
 
             <div class="results-container" id="resultsContainer">
@@ -476,6 +494,7 @@
             zh: {
                 title: "仓库货位速查",
                 subtitle: "输入SAP编码快速查询货物在仓库中的位置和库存信息",
+                updateText: "数据最后更新于: ",
                 sapCodeLabel: "SAP编码",
                 searchButton: "点击查询",
                 resultsTitle: "查询结果",
@@ -498,6 +517,7 @@
             id: {
                 title: "Pencarian Cepat Lokasi Gudang",
                 subtitle: "Masukkan kode SAP untuk mencari lokasi dan informasi stok barang di gudang dengan cepat",
+                updateText: "Data terakhir diperbarui: ",
                 sapCodeLabel: "Kode SAP",
                 searchButton: "Klik Cari",
                 resultsTitle: "Hasil Pencarian",
