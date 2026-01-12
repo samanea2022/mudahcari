@@ -388,7 +388,7 @@
                 <button class="lang-btn" data-lang="id">Bahasa Indonesia</button>
             </div>
 
-            <h1><i class="fas fa-warehouse"></i> <span data-i18n="title">仓库货物位置查询系统</span></h1>
+            <h1><i class="fas fa-warehouse"></i> <span data-i18n="title">7堆场货物位置查询系统</span></h1>
             <p><span data-i18n="subtitle">输入SAP编码快速查询货物在仓库中的位置和库存信息</span></p>
         </header>
 
@@ -396,7 +396,7 @@
             <div class="input-group">
                 <div class="sap-label"><span data-i18n="sapCodeLabel">SAP编码</span></div>
                 <div class="input-container">
-                    <input type="text" id="sapCode" placeholder="" autocomplete="off" data-placeholder-zh="请输入SAP编码，例如：4002010000" data-placeholder-id="Masukkan kode SAP, contoh: 4002010000">
+                    <input type="text" id="sapCode" placeholder="" autocomplete="off" data-placeholder-zh="请输入SAP编码，例如:4002010000" data-placeholder-id="Masukkan kode SAP, contoh: 4002010000">
                     <button class="search-btn" id="searchBtn">
                         <i class="fas fa-search"></i> <span data-i18n="searchButton">查询货物位置</span>
                     </button>
@@ -458,7 +458,7 @@
         </section>
 
         <footer class="footer">
-            <p><span data-i18n="footerText">仓库货物位置查询系统 &copy; 2026 | 数据来源于服务器数据库</span></p>
+            <p><span data-i18n="footerText">仓库货物位置查询系统 © 2026 | 数据来源于服务器数据库</span></p>
         </footer>
     </div>
 
@@ -474,10 +474,10 @@
         // 翻译词典
         const translations = {
             zh: {
-                title: "仓库货物位置查询系统",
+                title: "7堆场货物位置查询系统",
                 subtitle: "输入SAP编码快速查询货物在仓库中的位置和库存信息",
                 sapCodeLabel: "SAP编码",
-                searchButton: "查询货物位置",
+                searchButton: "点击查询",
                 resultsTitle: "查询结果",
                 resultsCount: "共 0 条记录",
                 initialTitle: "请输入SAP编码进行查询",
@@ -493,13 +493,13 @@
                 tableLocation: "存放位置",
                 tableName: "货物名称",
                 tableDesc: "产品描述",
-                footerText: "仓库货物位置查询系统 &copy; 2026 | 数据来源于服务器数据库"
+                footerText: "仓库货物位置查询系统 © 2026 | 数据来源于服务器数据库"
             },
             id: {
-                title: "Sistem Pencarian Lokasi Barang Gudang",
+                title: "Sistem Lokasi Barang - 7 Yard",
                 subtitle: "Masukkan kode SAP untuk mencari lokasi dan informasi stok barang di gudang dengan cepat",
                 sapCodeLabel: "Kode SAP",
-                searchButton: "Cari Lokasi Barang",
+                searchButton: "Klik Cari",
                 resultsTitle: "Hasil Pencarian",
                 resultsCount: "Total 0 catatan",
                 initialTitle: "Silakan masukkan kode SAP untuk mencari",
@@ -515,7 +515,7 @@
                 tableLocation: "Lokasi",
                 tableName: "Nama Barang",
                 tableDesc: "Deskripsi Produk",
-                footerText: "Sistem Pencarian Lokasi Barang Gudang &copy; 2026 | Data berasal dari database server"
+                footerText: "Sistem Pencarian Lokasi Barang Gudang © 2026 | Data berasal dari database server"
             }
         };
 
@@ -704,5 +704,4 @@
         sapCodeInput.addEventListener('focus', function() { this.select(); });
     </script>
 </body>
-
 </html>
