@@ -11,143 +11,189 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
 
         body {
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
-            padding: 20px;
+            padding: 15px;
             min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
         }
 
+        /* 头部区域 - 方案七集成式 */
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
+            margin-bottom: 25px;
+            padding: 25px 20px;
             background: linear-gradient(135deg, #2c3e50, #4a6491);
             color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: relative;
         }
 
-        /* 语言切换器样式 */
-        .language-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .lang-btn.active {
-            background: #3498db;
-            border-color: #3498db;
-            font-weight: 600;
-        }
-
-        /* 移动端语言切换器调整 */
-        @media (max-width: 768px) {
-            .language-switcher {
-                position: static;
-                margin-top: 15px;
-                justify-content: center;
-            }
-
-            .lang-btn {
-                padding: 10px 20px;
-                min-width: 120px;
-            }
+        .header-content {
+            margin-bottom: 25px;
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .search-section {
-            background-color: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-        }
-
-        .input-group {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .sap-label {
-            font-size: 1.2rem;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
             font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 5px;
         }
 
-        .input-container {
+        .header-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* 语言切换器 - 方案七风格 */
+        .lang-switcher {
+            display: inline-flex;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .lang-switcher-btn {
+            padding: 12px 28px;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            min-width: 140px;
+        }
+
+        .lang-switcher-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .lang-switcher-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 数据状态区域 */
+        .data-status-section {
+            background: #e8f4fc;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            font-size: 0.95rem;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             gap: 10px;
         }
 
-        @media (min-width: 768px) {
-            .input-container {
-                flex-direction: row;
-                align-items: center;
-            }
+        /* 搜索区域 */
+        .search-section {
+            background-color: white;
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
         }
 
-        input[type="text"] {
+        /* 分段控制器 */
+        .segmented-control {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 6px;
+            margin-bottom: 22px;
+            border: 1px solid #e1e5eb;
+        }
+
+        .segment-btn {
             flex: 1;
-            padding: 16px 20px;
+            padding: 18px 12px;
+            text-align: center;
+            border: none;
+            background: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .segment-btn i {
+            font-size: 1.2rem;
+        }
+
+        .segment-btn.active {
+            background: white;
+            color: #3498db;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* 输入框组 */
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 20px;
             border: 2px solid #e1e5eb;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1.1rem;
             transition: all 0.3s;
+            background: white;
+            -webkit-appearance: none;
         }
 
-        input[type="text"]:focus {
+        .search-input:focus {
             border-color: #3498db;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
         }
 
-        .search-btn {
-            background-color: #3498db;
-            color: white;
+        /* 按钮组 */
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 18px;
             border: none;
-            padding: 16px 30px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
@@ -156,34 +202,68 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            min-height: 56px;
         }
 
-        .search-btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .btn:active {
+            transform: translateY(1px);
         }
 
-        .search-btn:active {
-            transform: translateY(0);
-        }
-
-        .search-btn:disabled {
+        .btn-clear {
             background-color: #95a5a6;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+            color: white;
         }
 
+        .btn-clear:hover {
+            background-color: #7f8c8d;
+        }
+
+        .btn-search {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-search:hover {
+            background-color: #2980b9;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* 搜索提示 */
+        .search-hint {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 18px;
+            font-size: 0.95rem;
+            color: #5d6d7e;
+            border-left: 3px solid #2ecc71;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .search-hint i {
+            color: #2ecc71;
+            margin-top: 2px;
+            font-size: 1.1rem;
+        }
+
+        /* 结果区域 */
         .results-section {
             background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             overflow: hidden;
+            margin-bottom: 30px;
         }
 
         .results-header {
-            padding: 20px 25px;
+            padding: 20px;
             background-color: #2c3e50;
             color: white;
             display: flex;
@@ -192,77 +272,94 @@
         }
 
         .results-header h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
         }
 
         .results-count {
             background-color: #3498db;
-            padding: 5px 15px;
+            padding: 8px 18px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
 
-        #resultsContainer.results-container {
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch !important;
-            display: block;
+        .results-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-            font-size: 1.1rem;
-        }
-
-        .no-results {
+        .initial-message, .loading, .no-results, .error-message {
             text-align: center;
             padding: 60px 20px;
-            color: #7f8c8d;
+        }
+
+        .initial-message i, .loading i, .no-results i, .error-message i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .initial-message i {
+            color: #3498db;
+        }
+
+        .loading i {
+            color: #3498db;
+            animation: spin 1.5s linear infinite;
         }
 
         .no-results i {
-            font-size: 3rem;
-            margin-bottom: 20px;
             color: #bdc3c7;
         }
 
-        .error-message {
-            text-align: center;
-            padding: 60px 20px;
+        .error-message i {
             color: #e74c3c;
         }
 
-        .error-message i {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        .initial-message h3, .no-results h3, .error-message h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.3rem;
         }
 
-        /* 为表格设置一个绝对最小宽度，这是横向滚动的关键 */
-        #resultsTable.results-table {
-            min-width: 800px !important; /* 根据你的7列内容，可能需要850px或更多，请调整 */
+        .initial-message p, .loading p, .no-results p, .error-message p {
+            color: #7f8c8d;
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 表格 */
+        .results-table {
             width: 100%;
+            min-width: 700px;
             border-collapse: collapse;
-            table-layout: fixed; /* 使用固定布局，列宽由CSS明确指定，防止变形 */
         }
 
-        /* 固定表头各列的宽度比例 (根据你原来的设定微调) */
-        #resultsTable.results-table th:nth-child(1) { width: 15%; } /* SAP编码 */
-        #resultsTable.results-table th:nth-child(2) { width: 8%;  } /* 单位 */
-        #resultsTable.results-table th:nth-child(3) { width: 12%; } /* 库存数量 */
-        #resultsTable.results-table th:nth-child(4) { width: 10%; } /* 存放位置 */
-        #resultsTable.results-table th:nth-child(5) { width: 20%; } /* 货物名称 */
-        #resultsTable.results-table th:nth-child(6) { width: 35%; } /* 产品描述 */
-
-        /* 确保单元格内容正常换行，不撑开 */
-        #resultsTable.results-table td,
-        #resultsTable.results-table th {
-            word-wrap: break-word; /* 允许长单词断行 */
-            overflow-wrap: break-word; /* 更现代的标准 */
-            padding: 12px 8px; /* 调整内边距，让布局更紧凑 */
+        .results-table th {
+            background-color: #f8f9fa;
+            padding: 18px 15px;
             text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 2px solid #e1e5eb;
+            position: sticky;
+            top: 0;
+            font-size: 0.95rem;
+        }
+
+        .results-table td {
+            padding: 18px 15px;
             border-bottom: 1px solid #e1e5eb;
-            vertical-align: top; /* 内容顶部对齐，避免高度不一 */
+            vertical-align: top;
+            font-size: 0.95rem;
+        }
+
+        .results-table tr:last-child td {
+            border-bottom: none;
         }
 
         .results-table tr:hover {
@@ -276,11 +373,12 @@
 
         .location {
             display: inline-block;
-            padding: 6px 15px;
+            padding: 6px 14px;
             background-color: #e8f4fc;
             border-radius: 20px;
             font-weight: 500;
             color: #2980b9;
+            font-size: 0.9rem;
         }
 
         .quantity {
@@ -288,84 +386,12 @@
             color: #27ae60;
         }
 
-        .status {
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .status.in-stock {
-            background-color: #d5f4e6;
-            color: #27ae60;
-        }
-
-        .status.low-stock {
-            background-color: #fef9e7;
-            color: #f39c12;
-        }
-
-        .status.out-of-stock {
-            background-color: #fdebd0;
-            color: #e67e22;
-        }
-
         .footer {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 30px;
             padding: 20px;
             color: #7f8c8d;
             font-size: 0.9rem;
-        }
-
-        /* 移动端优化 */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-
-            .search-section {
-                padding: 20px;
-            }
-
-            .results-header {
-
-                gap: 15px;
-                align-items: flex-start;
-            }
-
-            .results-table {
-                display: block;
-                overflow-x: auto;
-            }
-
-            input[type="text"], .search-btn {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 15px;
-            }
-
-            .header {
-                padding: 15px;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-            }
-
-            .results-table th,
-            .results-table td {
-                padding: 12px 10px;
-                font-size: 0.9rem;
-            }
-
-            .location, .status {
-                font-size: 0.8rem;
-            }
         }
 
         /* 动画效果 */
@@ -374,79 +400,262 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* 位置2的样式 - 独立区域 */
-        .data-status-section {
-            background: #e8f4fc;
-            border-radius: 8px;
-            padding: 12px 20px;
-            margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-            font-size: 0.95rem;
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        /* 大屏幕适配 */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 500px;
+            }
+
+            .header {
+                padding: 30px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .lang-switcher-btn {
+                padding: 14px 32px;
+                min-width: 160px;
+            }
+
+            .button-group {
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 20px;
+                font-size: 1.15rem;
+            }
+
+            .search-input {
+                padding: 20px;
+            }
+        }
+
+        /* 中等屏幕适配 */
+        @media (max-width: 767px) {
+            .header h1 {
+                font-size: 1.7rem;
+            }
+
+            .header-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .lang-switcher {
+                width: 250px;
+            }
+
+            .lang-switcher-btn {
+                padding: 14px 20px;
+                min-width: 0;
+                font-size: 0.95rem;
+            }
+
+            .segment-btn {
+                padding: 16px 10px;
+                font-size: 1rem;
+            }
+
+            .segment-btn i {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* 小屏幕适配 */
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .segment-btn {
+                padding: 14px 8px;
+                font-size: 0.95rem;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .segment-btn i {
+                font-size: 1rem;
+                margin-right: 0;
+            }
+
+            .lang-switcher {
+                gap: 27px;
+                background: rgba(255, 255, 255, 0.08);
+                padding-left: 10px;
+            }
+
+            .lang-switcher-btn {
+                padding: 14px;
+                border-radius: 8px;
+            }
+
+            .btn {
+                padding: 16px;
+                font-size: 1rem;
+                min-height: 52px;
+            }
+
+            .search-input {
+                padding: 16px;
+                font-size: 1.05rem;
+            }
+
+            .search-hint {
+                padding: 14px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 极小屏幕适配 */
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 1.4rem;
+            }
+
+            .segment-btn {
+                font-size: 0.9rem;
+                padding: 12px 6px;
+            }
+
+            .btn {
+                font-size: 0.95rem;
+                padding: 14px;
+            }
+
+            .lang-switcher-btn {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 防止滚动时背景闪烁 */
+        .results-table th {
+            background-color: #f8f9fa;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- 头部区域 - 方案七集成式 -->
         <header class="header">
-            <!-- 语言切换器 -->
-            <div class="language-switcher">
-                <button class="lang-btn active" data-lang="zh">中文</button>
-                <button class="lang-btn" data-lang="id">Bahasa Indonesia</button>
+            <div class="header-content">
+                <h1><i class="fas fa-warehouse"></i> <span data-i18n="title">仓库货位速查</span></h1>
+                <p class="header-subtitle" data-i18n="subtitle">快速查询货物位置和库存信息</p>
             </div>
 
-            <h1><i class="fas fa-warehouse"></i> <span data-i18n="title">仓库货位速查</span></h1>
-            <p><span data-i18n="subtitle">输入SAP编码快速查询货物在仓库中的位置和库存信息</span></p>
-
+            <!-- 语言切换器 - 方案七风格 -->
+            <div class="lang-switcher">
+                <button class="lang-switcher-btn active" data-lang="zh">
+                    <span>中文</span>
+                </button>
+                <button class="lang-switcher-btn" data-lang="id">
+                    <span>Bahasa Indonesia</span>
+                </button>
+            </div>
         </header>
 
-        <!-- 在search-section上方添加新section -->
+        <!-- 数据状态区域 -->
         <section class="data-status-section">
-            <div class="container">
-                <p><i class="fas fa-database"></i> <span data-i18n="updateText">数据最后更新于:  </span><strong id="lastUpdateTime">2025-01-10 20:30</strong> </p>
-            </div>
+            <i class="fas fa-database"></i>
+            <span data-i18n="updateText">数据最后更新于: </span>
+            <strong id="lastUpdateTime">2025-01-10 20:30</strong>
         </section>
 
+        <!-- 搜索区域 -->
         <section class="search-section">
+            <!-- 分段控制器 -->
+            <div class="segmented-control">
+                <button class="segment-btn active" id="sapSegment" data-type="sap">
+                    <i class="fas fa-barcode"></i>
+                    <span data-i18n="sapSegment">SAP编码</span>
+                </button>
+                <button class="segment-btn" id="locationSegment" data-type="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span data-i18n="locationSegment">库位关键字</span>
+                </button>
+            </div>
+
+            <!-- 输入区域 -->
             <div class="input-group">
-                <div class="sap-label"><span data-i18n="sapCodeLabel">SAP编码</span></div>
-                <div class="input-container">
-                    <input type="text" id="sapCode" placeholder="" autocomplete="off" data-placeholder-zh="SAP编码，例如:4002012345" data-placeholder-id="Kode SAP, contoh: 4002012345">
-                    <button class="search-btn" id="searchBtn">
-                        <i class="fas fa-search"></i> <span data-i18n="searchButton">点击查询</span>
-                    </button>
-                </div>
+                <input type="text" class="search-input" id="searchInput"
+                       placeholder="" autocomplete="off"
+                       data-placeholder-sap-zh="输入SAP编码，例如：4002012345"
+                       data-placeholder-sap-id="Masukkan kode SAP, contoh: 4002012345"
+                       data-placeholder-location-zh="输入库位关键字，例如：A区、B01"
+                       data-placeholder-location-id="Masukkan kata kunci lokasi, contoh: Area A, B01">
+            </div>
+
+            <!-- 按钮组 -->
+            <div class="button-group">
+                <button class="btn btn-clear" id="clearBtn">
+                    <i class="fas fa-times"></i>
+                    <span data-i18n="clearButton">清空</span>
+                </button>
+                <button class="btn btn-search" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                    <span data-i18n="searchButton">查询</span>
+                </button>
+            </div>
+
+            <!-- 搜索提示 -->
+            <div class="search-hint" id="searchHint">
+                <i class="fas fa-info-circle"></i>
+                <span data-i18n="sapHint">输入SAP编码进行精确查询</span>
             </div>
         </section>
 
+        <!-- 结果区域 -->
         <section class="results-section">
             <div class="results-header">
                 <h2><i class="fas fa-list-alt"></i> <span data-i18n="resultsTitle">查询结果</span></h2>
-                <div class="results-count" id="resultsCount"><span data-i18n="resultsCount">共 0 条记录</span></div>
+                <div class="results-count" id="resultsCount">
+                    <span data-i18n="resultsCount">共 0 条记录</span>
+                </div>
             </div>
 
             <div class="results-container" id="resultsContainer">
-                <!-- 初始状态显示提示信息 -->
-                <div class="no-results" id="initialMessage">
+                <!-- 初始状态 -->
+                <div class="initial-message" id="initialMessage">
                     <i class="fas fa-search"></i>
-                    <h3 data-i18n="initialTitle">请输入SAP编码进行查询</h3>
-                    <p data-i18n="initialDesc">系统将显示货物在仓库中的所有位置和库存信息</p>
+                    <h3 data-i18n="initialTitle">请输入查询条件</h3>
+                    <p data-i18n="initialDesc">选择查询方式并输入内容查看货物信息</p>
                 </div>
 
                 <!-- 加载状态 -->
                 <div class="loading" id="loading" style="display: none;">
-                    <i class="fas fa-spinner fa-spin fa-2x"></i>
-                    <p data-i18n="loadingText">正在查询货物位置信息...</p>
+                    <i class="fas fa-spinner"></i>
+                    <p id="loadingText" data-i18n="loadingText">正在查询...</p>
                 </div>
 
                 <!-- 无结果状态 -->
                 <div class="no-results" id="noResults" style="display: none;">
                     <i class="fas fa-box-open"></i>
-                    <h3 data-i18n="noResultsTitle">未找到相关货物信息</h3>
-                    <p data-i18n="noResultsDesc">请检查SAP编码是否正确，或联系仓库管理员</p>
+                    <h3 data-i18n="noResultsTitle">未找到相关货物</h3>
+                    <p id="noResultsDesc" data-i18n="noResultsDesc">请检查查询条件是否正确</p>
                 </div>
 
                 <!-- 错误状态 -->
@@ -465,7 +674,6 @@
                             <th data-i18n="tableQuantity">库存数量</th>
                             <th data-i18n="tableLocation">存放位置</th>
                             <th data-i18n="tableName">货物名称</th>
-                            <th data-i18n="tableDesc">产品描述</th>
                         </tr>
                     </thead>
                     <tbody id="resultsBody">
@@ -476,34 +684,37 @@
         </section>
 
         <footer class="footer">
-            <p><span data-i18n="footerText">仓库货物位置查询系统 © 2026 | 数据来源于服务器数据库</span></p>
+            <p><span data-i18n="footerText">货位速查 © 2026 | 查得到，找得准</span></p>
         </footer>
     </div>
 
     <script>
-        // --- 配置部分：必须修改！请替换成你的信息 ---
-        const SUPABASE_URL = 'https://bnsbjgyulputgmqixjzs.supabase.co'; // 你的项目URL
-        const SUPABASE_ANON_KEY = 'sb_publishable_AMpdOLRMYhtY32EbVrhEUg_d58mXmte'; // 你的Publishable key
-
-        // 初始化Supabase客户端
+        // --- 配置部分 ---
+        const SUPABASE_URL = 'https://bnsbjgyulputgmqixjzs.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_AMpdOLRMYhtY32EbVrhEUg_d58mXmte';
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // --- 多语言支持部分 ---
-        // 翻译词典
+        // --- 多语言支持 ---
         const translations = {
             zh: {
                 title: "仓库货位速查",
-                subtitle: "输入SAP编码快速查询货物在仓库中的位置和库存信息",
+                subtitle: "快速查询货物位置和库存信息",
                 updateText: "数据最后更新于: ",
-                sapCodeLabel: "SAP编码",
-                searchButton: "点击查询",
+                sapSegment: "SAP编码",
+                locationSegment: "库位关键字",
+                clearButton: "清空",
+                searchButton: "查询",
                 resultsTitle: "查询结果",
                 resultsCount: "共 0 条记录",
-                initialTitle: "请输入SAP编码进行查询",
-                initialDesc: "系统将显示货物在仓库中的所有位置和库存信息",
-                loadingText: "正在查询货物位置信息...",
-                noResultsTitle: "未找到相关货物信息",
-                noResultsDesc: "请检查SAP编码是否正确，或联系仓库管理员",
+                initialTitle: "请输入查询条件",
+                initialDesc: "选择查询方式并输入内容查看货物信息",
+                loadingText: "正在查询...",
+                loadingSapText: "正在查询SAP编码...",
+                loadingLocationText: "正在查询库位关键字...",
+                noResultsTitle: "未找到相关货物",
+                noResultsDesc: "请检查查询条件是否正确",
+                noResultsSapDesc: "未找到该SAP编码的货物",
+                noResultsLocationDesc: "未找到包含该关键字的库位",
                 errorTitle: "查询失败",
                 errorDesc: "服务器连接失败，请稍后重试",
                 tableSap: "SAP编码",
@@ -511,22 +722,29 @@
                 tableQuantity: "库存数量",
                 tableLocation: "存放位置",
                 tableName: "货物名称",
-                tableDesc: "产品描述",
-                footerText: "货位速查 © 2026 | 查得到，找得准"
+                footerText: "货位速查 © 2026 | 查得到，找得准",
+                sapHint: "输入SAP编码进行精确查询",
+                locationHint: "输入库位关键字进行模糊查询（如：A区、B01）"
             },
             id: {
                 title: "Cepat Cari Lokasi",
-                subtitle: "Masukkan kode SAP untuk mencari lokasi dan informasi stok barang di gudang",
+                subtitle: "Cari lokasi dan informasi stok barang dengan cepat",
                 updateText: "Data diperbarui: ",
-                sapCodeLabel: "Kode SAP",
-                searchButton: "Klik Cari",
+                sapSegment: "Kode SAP",
+                locationSegment: "Kata Kunci Lokasi",
+                clearButton: "Hapus",
+                searchButton: "Cari",
                 resultsTitle: "Hasil",
                 resultsCount: "Total 0 catatan",
-                initialTitle: "Silakan masukkan kode SAP untuk mencari",
-                initialDesc: "Sistem akan menampilkan semua lokasi dan informasi stok barang di gudang",
-                loadingText: "Mencari informasi lokasi barang...",
-                noResultsTitle: "Informasi barang tidak ditemukan",
-                noResultsDesc: "Periksa apakah kode SAP benar, atau hubungi administrator gudang",
+                initialTitle: "Silakan masukkan kondisi pencarian",
+                initialDesc: "Pilih metode pencarian dan masukkan konten untuk melihat informasi barang",
+                loadingText: "Sedang mencari...",
+                loadingSapText: "Sedang mencari kode SAP...",
+                loadingLocationText: "Sedang mencari kata kunci lokasi...",
+                noResultsTitle: "Barang tidak ditemukan",
+                noResultsDesc: "Periksa apakah kondisi pencarian benar",
+                noResultsSapDesc: "Barang dengan kode SAP ini tidak ditemukan",
+                noResultsLocationDesc: "Tidak ditemukan lokasi yang mengandung kata kunci ini",
                 errorTitle: "Pencarian gagal",
                 errorDesc: "Koneksi server gagal, silakan coba lagi nanti",
                 tableSap: "Kode SAP",
@@ -534,38 +752,59 @@
                 tableQuantity: "Jumlah Stok",
                 tableLocation: "Lokasi",
                 tableName: "Nama Barang",
-                tableDesc: "Deskripsi Produk",
-                footerText: "Cepat Cari Lokasi © 2026 | Bisa Dicari, Tepat Ditemukan"
+                footerText: "Cepat Cari Lokasi © 2026 | Bisa Dicari, Tepat Ditemukan",
+                sapHint: "Masukkan kode SAP untuk pencarian tepat",
+                locationHint: "Masukkan kata kunci lokasi untuk pencarian samar (contoh: Area A, B01)"
             }
         };
 
-        // 当前语言
+        // 当前语言和搜索类型
         let currentLang = 'id';
+        let currentSearchType = 'sap';
+
+        // DOM元素
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const sapSegment = document.getElementById('sapSegment');
+        const locationSegment = document.getElementById('locationSegment');
+        const searchHint = document.getElementById('searchHint');
+        const resultsCount = document.getElementById('resultsCount');
+        const initialMessage = document.getElementById('initialMessage');
+        const loading = document.getElementById('loading');
+        const loadingText = document.getElementById('loadingText');
+        const noResults = document.getElementById('noResults');
+        const noResultsDesc = document.getElementById('noResultsDesc');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const resultsTable = document.getElementById('resultsTable');
+        const resultsBody = document.getElementById('resultsBody');
+        const langSwitcherBtns = document.querySelectorAll('.lang-switcher-btn');
+
+        // --- 初始化函数 ---
+        function initApp() {
+            initLanguage();
+            setupEventListeners();
+            updateSearchUI();
+            searchInput.focus();
+        }
 
         // 初始化语言
         function initLanguage() {
-            // 从本地存储获取保存的语言设置
-            const savedLang = localStorage.getItem('warehouse_lang');
-            if (savedLang && (savedLang === 'zh' || savedLang === 'id')) {
+            const savedLang = localStorage.getItem('warehouse_lang') || 'id';
+            if (savedLang === 'zh' || savedLang === 'id') {
                 currentLang = savedLang;
             }
-
-            // 更新界面语言
             updateLanguage();
-
-            // 设置语言按钮状态
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === currentLang);
-            });
+            updateLangSwitcher();
+            updateSegmentButtons();
         }
 
-        // 更新界面语言
+        // 更新语言
         function updateLanguage() {
-            // 更新所有带data-i18n属性的元素
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[currentLang][key]) {
-                    // 处理结果计数特殊格式
                     if (key === 'resultsCount') {
                         const count = element.textContent.match(/\d+/)?.[0] || '0';
                         element.textContent = translations[currentLang][key].replace('0', count);
@@ -574,159 +813,235 @@
                     }
                 }
             });
-
-            // 更新输入框placeholder
-            const sapCodeInput = document.getElementById('sapCode');
-            const placeholderKey = currentLang === 'zh' ? 'data-placeholder-zh' : 'data-placeholder-id';
-            sapCodeInput.placeholder = sapCodeInput.getAttribute(placeholderKey);
+            updateInputPlaceholder();
         }
 
-        // 切换语言
-        function switchLanguage(lang) {
-            if (lang === currentLang) return;
+        // 更新语言切换器状态
+        function updateLangSwitcher() {
+            langSwitcherBtns.forEach(btn => {
+                const lang = btn.getAttribute('data-lang');
+                btn.classList.toggle('active', lang === currentLang);
+            });
+        }
 
-            currentLang = lang;
+        // 更新输入框提示
+        function updateInputPlaceholder() {
+            const placeholderKey = `data-placeholder-${currentSearchType}-${currentLang}`;
+            const placeholder = searchInput.getAttribute(placeholderKey) || '';
+            searchInput.placeholder = placeholder;
+        }
 
-            // 保存到本地存储
-            localStorage.setItem('warehouse_lang', lang);
+        // 更新分段按钮状态
+        function updateSegmentButtons() {
+            const sapText = sapSegment.querySelector('span');
+            const locationText = locationSegment.querySelector('span');
 
-            // 更新语言按钮状态
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            sapText.textContent = translations[currentLang]['sapSegment'];
+            locationText.textContent = translations[currentLang]['locationSegment'];
+
+            sapSegment.classList.toggle('active', currentSearchType === 'sap');
+            locationSegment.classList.toggle('active', currentSearchType === 'location');
+        }
+
+        // 更新搜索提示
+        function updateSearchHint() {
+            const hintKey = currentSearchType === 'sap' ? 'sapHint' : 'locationHint';
+            const hintText = searchHint.querySelector('span');
+            hintText.textContent = translations[currentLang][hintKey];
+        }
+
+        // 更新搜索UI
+        function updateSearchUI() {
+            updateInputPlaceholder();
+            updateSearchHint();
+            updateSegmentButtons();
+
+            // 清空输入框
+            searchInput.value = '';
+
+            // 更新加载文本
+            const loadingKey = currentSearchType === 'sap' ? 'loadingSapText' : 'loadingLocationText';
+            loadingText.textContent = translations[currentLang][loadingKey];
+        }
+
+        // --- 事件监听器 ---
+        function setupEventListeners() {
+            // 语言切换
+            langSwitcherBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    if (lang !== currentLang) {
+                        currentLang = lang;
+                        localStorage.setItem('warehouse_lang', lang);
+                        updateLangSwitcher();
+                        updateLanguage();
+                        updateSearchUI();
+                    }
+                });
             });
 
-            // 更新界面语言
-            updateLanguage();
+            // 分段控制器切换
+            sapSegment.addEventListener('click', () => switchSearchType('sap'));
+            locationSegment.addEventListener('click', () => switchSearchType('location'));
+
+            // 清空按钮
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                searchInput.focus();
+            });
+
+            // 查询按钮
+            searchBtn.addEventListener('click', performSearch);
+
+            // 回车键查询
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+
+            // 输入框聚焦时选中文本
+            searchInput.addEventListener('focus', function() {
+                setTimeout(() => this.select(), 100);
+            });
+
+            // 移动端触摸优化
+            document.addEventListener('touchstart', function() {}, {passive: true});
         }
 
-        // DOM元素
-        const sapCodeInput = document.getElementById('sapCode');
-        const searchBtn = document.getElementById('searchBtn');
-        const resultsCount = document.getElementById('resultsCount');
-        const resultsContainer = document.getElementById('resultsContainer');
-        const initialMessage = document.getElementById('initialMessage');
-        const loading = document.getElementById('loading');
-        const noResults = document.getElementById('noResults');
-        const errorMessage = document.getElementById('errorMessage');
-        const errorText = document.getElementById('errorText');
-        const resultsTable = document.getElementById('resultsTable');
-        const resultsBody = document.getElementById('resultsBody');
-
-        // 状态文本映射
-        const statusText = {
-            "in-stock": "库存充足",
-            "low-stock": "库存不足",
-            "out-of-stock": "无库存"
-        };
-
-        // 主查询函数
-        async function searchGoods() {
-            const sapCode = sapCodeInput.value.trim().toUpperCase();
-
-            // 验证输入
-            if (!sapCode) {
-                alert(currentLang === 'zh' ? "请输入SAP编码" : "Silakan masukkan kode SAP");
-                sapCodeInput.focus();
-                return;
+        // 切换搜索类型
+        function switchSearchType(type) {
+            if (currentSearchType !== type) {
+                currentSearchType = type;
+                updateSearchUI();
+                searchInput.focus();
             }
+        }
 
-            // 显示加载状态，禁用按钮
+        // 显示加载状态
+        function showLoading() {
             initialMessage.style.display = 'none';
             noResults.style.display = 'none';
             errorMessage.style.display = 'none';
             resultsTable.style.display = 'none';
             loading.style.display = 'block';
             searchBtn.disabled = true;
+            clearBtn.disabled = true;
+            sapSegment.style.pointerEvents = 'none';
+            locationSegment.style.pointerEvents = 'none';
+            langSwitcherBtns.forEach(btn => btn.style.pointerEvents = 'none');
+        }
+
+        // 隐藏加载状态
+        function hideLoading() {
+            loading.style.display = 'none';
+            searchBtn.disabled = false;
+            clearBtn.disabled = false;
+            sapSegment.style.pointerEvents = 'auto';
+            locationSegment.style.pointerEvents = 'auto';
+            langSwitcherBtns.forEach(btn => btn.style.pointerEvents = 'auto');
+        }
+
+        // 执行搜索
+        async function performSearch() {
+            const query = searchInput.value.trim();
+
+            if (!query) {
+                const alertMsg = currentLang === 'zh'
+                    ? (currentSearchType === 'sap' ? "请输入SAP编码" : "请输入库位关键字")
+                    : (currentSearchType === 'sap' ? "Silakan masukkan kode SAP" : "Silakan masukkan kata kunci lokasi");
+                alert(alertMsg);
+                searchInput.focus();
+                return;
+            }
+
+            showLoading();
 
             try {
-                // 1. 执行Supabase查询（关键步骤）
-                const { data, error } = await supabaseClient
-                    .from('products') // 请确保你的表名是 'products'
-                    .select('sap_code, product_name, product_description, unit, location, quantity') // 选择你的字段
-                    .eq('sap_code', sapCode); // 按sap_code精确查询
+                let data, error;
 
-                // 2. 检查查询错误
-                if (error) throw error;
-
-                // 隐藏加载状态，启用按钮
-                loading.style.display = 'none';
-                searchBtn.disabled = false;
-
-                // 更新结果计数
-                const countText = currentLang === 'zh'
-                    ? `共 ${data.length || 0} 条记录`
-                    : `Total ${data.length || 0} catatan`;
-                const countSpan = resultsCount.querySelector('span');
-                if (countSpan) {
-                    countSpan.textContent = countText;
+                if (currentSearchType === 'sap') {
+                    // SAP编码查询
+                    const response = await supabaseClient
+                        .from('products')
+                        .select('sap_code, product_name, product_description, unit, location, quantity')
+                        .eq('sap_code', query.toUpperCase());
+                    data = response.data;
+                    error = response.error;
                 } else {
-                    resultsCount.textContent = countText;
+                    // 库位关键字查询
+                    const response = await supabaseClient
+                        .from('products')
+                        .select('sap_code, product_name, product_description, unit, location, quantity')
+                        .ilike('location', `%${query}%`);
+                    data = response.data;
+                    error = response.error;
                 }
 
-                // 3. 根据查询结果更新UI
+                if (error) throw error;
+
+                hideLoading();
+                updateResultsCount(data?.length || 0);
+
                 if (!data || data.length === 0) {
+                    const descKey = currentSearchType === 'sap' ? 'noResultsSapDesc' : 'noResultsLocationDesc';
+                    noResultsDesc.textContent = translations[currentLang][descKey];
                     noResults.style.display = 'block';
                 } else {
                     renderResults(data);
                     resultsTable.style.display = 'table';
                     resultsTable.classList.add('fade-in');
+
+                    // 平滑滚动到结果区域
+                    setTimeout(() => {
+                        document.querySelector('.results-section').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 300);
                 }
 
             } catch (error) {
-                // 处理错误
                 console.error('查询失败:', error);
-                loading.style.display = 'none';
-                searchBtn.disabled = false;
+                hideLoading();
                 const errorMsg = currentLang === 'zh'
-                    ? `查询失败: ${error.message}。请检查控制台或网络连接。`
-                    : `Pencarian gagal: ${error.message}. Periksa konsol atau koneksi jaringan.`;
+                    ? `查询失败: ${error.message}`
+                    : `Pencarian gagal: ${error.message}`;
                 errorText.textContent = errorMsg;
                 errorMessage.style.display = 'block';
             }
         }
 
-        // 渲染结果到表格
+        // 更新结果计数
+        function updateResultsCount(count) {
+            const countText = currentLang === 'zh'
+                ? `共 ${count} 条记录`
+                : `Total ${count} catatan`;
+            resultsCount.innerHTML = `<span>${countText}</span>`;
+        }
+
+        // 渲染结果
         function renderResults(results) {
-            resultsBody.innerHTML = ''; // 清空旧结果
+            resultsBody.innerHTML = '';
             results.forEach(item => {
                 const row = document.createElement('tr');
                 row.classList.add('fade-in');
-                // 注意：这里使用的字段名与你数据库的字段名完全一致
                 row.innerHTML = `
                     <td class="sap-code">${item.sap_code || ''}</td>
                     <td>${item.unit || ''}</td>
-                    <td class="quantity">${item.quantity || 0} </td>
+                    <td class="quantity">${item.quantity || 0}</td>
                     <td><span class="location">${item.location || ''}</span></td>
                     <td>${item.product_name || ''}</td>
-                    <td>${item.product_description || ''}</td>
                 `;
                 resultsBody.appendChild(row);
             });
         }
 
-        // 事件监听：按钮点击
-        searchBtn.addEventListener('click', searchGoods);
+        // 页面加载初始化
+        window.addEventListener('load', initApp);
 
-        // 事件监听：按Enter键查询
-        sapCodeInput.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') searchGoods();
+        // 防止表单提交刷新页面
+        document.addEventListener('submit', function(e) {
+            e.preventDefault();
         });
-
-        // 事件监听：语言切换按钮
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                switchLanguage(this.getAttribute('data-lang'));
-            });
-        });
-
-        // 页面加载时初始化
-        window.addEventListener('load', () => {
-            initLanguage();
-            sapCodeInput.focus();
-        });
-
-        // 输入框选中文本功能
-        sapCodeInput.addEventListener('focus', function() { this.select(); });
     </script>
 </body>
 </html>
