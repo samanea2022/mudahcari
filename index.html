@@ -71,6 +71,9 @@
             padding: 5px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             -webkit-backdrop-filter: blur(10px);
+            /* 新增：设置固定宽度确保两个按钮一样大 */
+            width: 350px;
+            max-width: 90%;
         }
 
         .lang-switcher-btn {
@@ -83,7 +86,13 @@
             cursor: pointer;
             border-radius: 10px;
             transition: all 0.3s ease;
-            min-width: 140px;
+            /* 修改：设置flex: 1让两个按钮等宽 */
+            flex: 1;
+            min-width: 0; /* 防止文本溢出 */
+            /* 确保文本居中，可以折行 */
+            text-align: center;
+            white-space: normal;
+            word-break: break-word;
         }
 
         .lang-switcher-btn:hover {
@@ -412,7 +421,7 @@
         /* 大屏幕适配 */
         @media (min-width: 768px) {
             .container {
-                max-width: 500px;
+                max-width: 700px;
             }
 
             .header {
@@ -457,7 +466,8 @@
             }
 
             .lang-switcher {
-                width: 250px;
+                width: 100%;
+                max-width: 350px;
             }
 
             .lang-switcher-btn {
@@ -477,7 +487,7 @@
         }
 
         /* 小屏幕适配 */
-        @media (max-width: 480px) {
+        @media (max-width: 450px) {
             body {
                 padding: 12px;
             }
@@ -503,9 +513,10 @@
             }
 
             .lang-switcher {
-                gap: 27px;
+                flex-direction: column;
+                padding: 8px;
+                gap: 5px;
                 background: rgba(255, 255, 255, 0.08);
-                padding-left: 10px;
             }
 
             .lang-switcher-btn {
@@ -604,9 +615,9 @@
                 <input type="text" class="search-input" id="searchInput"
                        placeholder="" autocomplete="off"
                        data-placeholder-sap-zh="输入SAP编码，例如：4002012345"
-                       data-placeholder-sap-id="Masukkan kode SAP, contoh: 4002012345"
+                       data-placeholder-sap-id="Kode SAP, contoh: 4002012345"
                        data-placeholder-location-zh="输入库位关键字，例如：A区、B01"
-                       data-placeholder-location-id="Masukkan kata kunci lokasi, contoh: Area A, B01">
+                       data-placeholder-location-id="Kata kunci lokasi, contoh: Area A, B01">
             </div>
 
             <!-- 按钮组 -->
@@ -728,7 +739,7 @@
             },
             id: {
                 title: "Cepat Cari Lokasi",
-                subtitle: "Cari lokasi dan informasi stok barang dengan cepat",
+                subtitle: "Cari lokasi dan informasi stok barang",
                 updateText: "Data diperbarui: ",
                 sapSegment: "Kode SAP",
                 locationSegment: "Kata Kunci Lokasi",
@@ -912,7 +923,6 @@
             if (currentSearchType !== type) {
                 currentSearchType = type;
                 updateSearchUI();
-                searchInput.focus();
             }
         }
 
