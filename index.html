@@ -425,7 +425,7 @@
         <section class="results-section">
             <div class="results-header">
                 <h2><i class="fas fa-list-alt"></i> <span data-i18n="resultsTitle">查询结果</span></h2>
-                <div class="results-count" id="resultsCount" data-i18n="resultsCount">共 0 条记录</div>
+                <div class="results-count" id="resultsCount"><span data-i18n="resultsCount">共 0 条记录</span></div>
             </div>
 
             <div class="results-container" id="resultsContainer">
@@ -656,7 +656,12 @@
                 const countText = currentLang === 'zh'
                     ? `共 ${data.length || 0} 条记录`
                     : `Total ${data.length || 0} catatan`;
-                resultsCount.textContent = countText;
+                const countSpan = resultsCount.querySelector('span');
+                if (countSpan) {
+                    countSpan.textContent = countText;
+                } else {
+                    resultsCount.textContent = countText;
+                }
 
                 // 3. 根据查询结果更新UI
                 if (!data || data.length === 0) {
