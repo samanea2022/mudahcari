@@ -26,9 +26,78 @@
         .container {
             max-width: 100%;
             margin: 0 auto;
+            position: relative;
         }
 
-        /* 头部区域 - 方案七集成式 */
+        /* 语言切换器 - 独立的块，右上角 */
+        .lang-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+            padding: 0 5px;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 85px;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 2px solid #e1e5eb;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .lang-btn.active {
+            background: #3498db;
+            border-color: #2980b9;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        /* 国旗图标 */
+        .flag-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .flag-zh {
+            background: linear-gradient(135deg, #de2910 50%, #ffde00 50%);
+            color: #ffde00;
+        }
+
+        .flag-id {
+            background: linear-gradient(180deg, #e70011 50%, white 50%);
+            color: white;
+        }
+
+        /* 头部区域 */
         .header {
             text-align: center;
             margin-bottom: 25px;
@@ -37,11 +106,10 @@
             color: white;
             border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative;
         }
 
         .header-content {
-            margin-bottom: 25px;
+            margin-bottom: 0;
         }
 
         .header h1 {
@@ -60,51 +128,6 @@
             max-width: 500px;
             margin: 0 auto;
             line-height: 1.5;
-        }
-
-        /* 语言切换器 - 方案七风格 */
-        .lang-switcher {
-            display: inline-flex;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            -webkit-backdrop-filter: blur(10px);
-            /* 新增：设置固定宽度确保两个按钮一样大 */
-            width: 350px;
-            max-width: 90%;
-        }
-
-        .lang-switcher-btn {
-            padding: 12px 28px;
-            border: none;
-            background: transparent;
-            font-size: 1rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.85);
-            cursor: pointer;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            /* 修改：设置flex: 1让两个按钮等宽 */
-            flex: 1;
-            min-width: 0; /* 防止文本溢出 */
-            /* 确保文本居中，可以折行 */
-            text-align: center;
-            white-space: normal;
-            word-break: break-word;
-        }
-
-        .lang-switcher-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-        }
-
-        .lang-switcher-btn.active {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         /* 数据状态区域 */
@@ -419,9 +442,9 @@
         }
 
         /* 大屏幕适配 */
-        @media (min-width: 765px) {
+        @media (min-width: 700px) {
             .container {
-                max-width: 700px;
+                max-width: 650px;
             }
 
             .header {
@@ -436,9 +459,9 @@
                 font-size: 1.1rem;
             }
 
-            .lang-switcher-btn {
-                padding: 14px 20px;
-                min-width: 160px;
+            .lang-btn {
+                padding: 8px 16px;
+                min-width: 85px;
             }
 
             .button-group {
@@ -455,93 +478,8 @@
             }
         }
 
-        /* 中等屏幕适配 */
-        @media (max-width: 767px) {
-            .header h1 {
-                font-size: 1.7rem;
-            }
 
-            .header-subtitle {
-                font-size: 0.95rem;
-            }
-
-            .lang-switcher {
-                width: 100%;
-                max-width: 350px;
-            }
-
-            .lang-switcher-btn {
-                padding: 14px 20px;
-                min-width: 0;
-                font-size: 0.95rem;
-            }
-
-            .segment-btn {
-                padding: 16px 10px;
-                font-size: 1rem;
-            }
-
-            .segment-btn i {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* 小屏幕适配 */
-        @media (max-width: 400px) {
-            body {
-                padding: 12px;
-            }
-
-            .header {
-                padding: 20px 15px;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-            }
-
-            .segment-btn {
-                padding: 14px 8px;
-                font-size: 0.95rem;
-                flex-direction: column;
-                gap: 6px;
-            }
-
-            .segment-btn i {
-                font-size: 1rem;
-                margin-right: 0;
-            }
-
-            .lang-switcher {
-                flex-direction: column;
-                padding: 8px;
-                gap: 5px;
-                background: rgba(255, 255, 255, 0.08);
-            }
-
-            .lang-switcher-btn {
-                padding: 14px;
-                border-radius: 8px;
-            }
-
-            .btn {
-                padding: 16px;
-                font-size: 1rem;
-                min-height: 52px;
-            }
-
-            .search-input {
-                padding: 16px;
-                font-size: 1.05rem;
-            }
-
-            .search-hint {
-                padding: 14px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* 极小屏幕适配 */
+        /* 超小屏幕适配 */
         @media (max-width: 360px) {
             .header h1 {
                 font-size: 1.4rem;
@@ -557,9 +495,16 @@
                 padding: 14px;
             }
 
-            .lang-switcher-btn {
-                padding: 12px;
-                font-size: 0.9rem;
+            .lang-btn {
+                padding: 5px 8px;
+                font-size: 0.75rem;
+                min-width: 65px;
+            }
+
+            .flag-icon {
+                width: 14px;
+                height: 14px;
+                font-size: 9px;
             }
         }
 
@@ -571,21 +516,25 @@
 </head>
 <body>
     <div class="container">
-        <!-- 头部区域 - 方案七集成式 -->
+        <!-- 语言切换器 - 完全独立的块，在标题栏外面 -->
+        <div class="lang-container">
+            <div class="language-switcher">
+                <button class="lang-btn active" data-lang="zh">
+                    <span class="flag-icon flag-zh">中</span>
+                    <span>中文</span>
+                </button>
+                <button class="lang-btn" data-lang="id">
+                    <span class="flag-icon flag-id">ID</span>
+                    <span>ID</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 头部区域 - 独立的标题栏 -->
         <header class="header">
             <div class="header-content">
                 <h1><i class="fas fa-warehouse"></i> <span data-i18n="title">仓库货位速查</span></h1>
                 <p class="header-subtitle" data-i18n="subtitle">快速查询货物位置和库存信息</p>
-            </div>
-
-            <!-- 语言切换器 - 方案七风格 -->
-            <div class="lang-switcher">
-                <button class="lang-switcher-btn active" data-lang="zh">
-                    <span>中文</span>
-                </button>
-                <button class="lang-switcher-btn" data-lang="id">
-                    <span>Bahasa Indonesia</span>
-                </button>
             </div>
         </header>
 
@@ -695,7 +644,7 @@
         </section>
 
         <footer class="footer">
-            <p><span data-i18n="footerText">货位速查 © 2026 | 查得到，找得准</span></p>
+            <p><span data-i18n="footerText">2026 | 查得到，找得准</span></p>
         </footer>
     </div>
 
@@ -733,7 +682,7 @@
                 tableQuantity: "库存数量",
                 tableLocation: "存放位置",
                 tableName: "货物名称",
-                footerText: "货位速查 © 2026 | 查得到，找得准",
+                footerText: "2026 | 查得到，找得准",
                 sapHint: "输入SAP编码进行精确查询",
                 locationHint: "输入库位关键字进行模糊查询（如：A、B01）"
             },
@@ -742,7 +691,7 @@
                 subtitle: "Cari lokasi dan informasi stok barang",
                 updateText: "Data diperbarui: ",
                 sapSegment: "Kode SAP",
-                locationSegment: "Kata Kunci Lokasi",
+                locationSegment: "Kata Kunci",
                 clearButton: "Hapus",
                 searchButton: "Cari",
                 resultsTitle: "Hasil",
@@ -763,7 +712,7 @@
                 tableQuantity: "Jumlah Stok",
                 tableLocation: "Lokasi",
                 tableName: "Nama Barang",
-                footerText: "Cepat Cari Lokasi © 2026 | Bisa Dicari, Tepat Ditemukan",
+                footerText: "2026 | Bisa Dicari, Tepat Ditemukan",
                 sapHint: "Masukkan kode SAP untuk pencarian tepat",
                 locationHint: "Masukkan kata kunci lokasi untuk pencarian samar (contoh: A, B01)"
             }
@@ -790,7 +739,7 @@
         const errorText = document.getElementById('errorText');
         const resultsTable = document.getElementById('resultsTable');
         const resultsBody = document.getElementById('resultsBody');
-        const langSwitcherBtns = document.querySelectorAll('.lang-switcher-btn');
+        const langBtns = document.querySelectorAll('.lang-btn');
 
         // --- 初始化函数 ---
         function initApp() {
@@ -829,7 +778,7 @@
 
         // 更新语言切换器状态
         function updateLangSwitcher() {
-            langSwitcherBtns.forEach(btn => {
+            langBtns.forEach(btn => {
                 const lang = btn.getAttribute('data-lang');
                 btn.classList.toggle('active', lang === currentLang);
             });
@@ -878,7 +827,7 @@
         // --- 事件监听器 ---
         function setupEventListeners() {
             // 语言切换
-            langSwitcherBtns.forEach(btn => {
+            langBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const lang = this.getAttribute('data-lang');
                     if (lang !== currentLang) {
@@ -937,7 +886,7 @@
             clearBtn.disabled = true;
             sapSegment.style.pointerEvents = 'none';
             locationSegment.style.pointerEvents = 'none';
-            langSwitcherBtns.forEach(btn => btn.style.pointerEvents = 'none');
+            langBtns.forEach(btn => btn.style.pointerEvents = 'none');
         }
 
         // 隐藏加载状态
@@ -947,7 +896,7 @@
             clearBtn.disabled = false;
             sapSegment.style.pointerEvents = 'auto';
             locationSegment.style.pointerEvents = 'auto';
-            langSwitcherBtns.forEach(btn => btn.style.pointerEvents = 'auto');
+            langBtns.forEach(btn => btn.style.pointerEvents = 'auto');
         }
 
         // 执行搜索
