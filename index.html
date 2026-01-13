@@ -974,7 +974,12 @@
             const countText = currentLang === 'zh'
                 ? `共 ${count} 条记录`
                 : `Total ${count} catatan`;
-            resultsCount.innerHTML = `<span>${countText}</span>`;
+            const countSpan = resultsCount.querySelector('span');
+            if (countSpan) {
+                countSpan.textContent = countText;
+            } else {
+                resultsCount.textContent = countText;
+            };
         }
 
         // 渲染结果
