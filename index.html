@@ -366,9 +366,10 @@
 
         /* 表格 */
         .results-table {
+            min-width: 800px !important;
             width: 100%;
-            min-width: 700px;
             border-collapse: collapse;
+            table-layout: fixed; /* 使用固定布局，列宽由CSS明确指定，防止变形 */
         }
 
         .results-table th {
@@ -382,6 +383,14 @@
             top: 0;
             font-size: 0.95rem;
         }
+
+        /* 固定表头各列的宽度比例 (根据你原来的设定微调) */
+        .results-table th:nth-child(1) { width: 15%; } /* SAP编码 */
+        .results-table th:nth-child(2) { width: 10%;  } /* 单位 */
+        .results-table th:nth-child(3) { width: 15%; } /* 库存数量 */
+        .results-table th:nth-child(4) { width: 12%; } /* 存放位置 */
+        .results-table th:nth-child(5) { width: 18%; } /* 货物名称 */
+        .results-table th:nth-child(6) { width: 30%; } /* 产品描述 */
 
         .results-table td {
             padding: 18px 15px;
