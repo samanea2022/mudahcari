@@ -88,7 +88,7 @@
         }
 
         .flag-zh {
-            background: linear-gradient(135deg, #de2910 50%, #de2910 50%);
+            background: linear-gradient(135deg, #de2910 50%, #ffde00 50%);
             color: #ffde00;
         }
 
@@ -634,6 +634,7 @@
                             <th data-i18n="tableQuantity">库存数量</th>
                             <th data-i18n="tableLocation">存放位置</th>
                             <th data-i18n="tableName">货物名称</th>
+                            <th data-i18n="tableDesc">产品描述</th>
                         </tr>
                     </thead>
                     <tbody id="resultsBody">
@@ -682,6 +683,7 @@
                 tableQuantity: "库存数量",
                 tableLocation: "存放位置",
                 tableName: "货物名称",
+                tableDesc:"产品描述",
                 footerText: "2026 | 查得到，找得准",
                 sapHint: "输入SAP编码进行精确查询",
                 locationHint: "输入库位关键字进行模糊查询（如：A、B01）"
@@ -712,6 +714,7 @@
                 tableQuantity: "Jumlah Stok",
                 tableLocation: "Lokasi",
                 tableName: "Nama Barang",
+                tableDesc:"Deskripsi Produk",
                 footerText: "2026 | Bisa Dicari, Tepat Ditemukan",
                 sapHint: "Masukkan kode SAP untuk pencarian tepat",
                 locationHint: "Masukkan kata kunci lokasi untuk pencarian samar (contoh: A, B01)"
@@ -994,6 +997,7 @@
                     <td class="quantity">${item.quantity || 0}</td>
                     <td><span class="location">${item.location || ''}</span></td>
                     <td>${item.product_name || ''}</td>
+                    <td>${item.product_description || ''}</td>
                 `;
                 resultsBody.appendChild(row);
             });
@@ -1008,5 +1012,4 @@
         });
     </script>
 </body>
-
 </html>
