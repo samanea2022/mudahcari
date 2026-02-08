@@ -504,10 +504,570 @@
         .results-table th {
             background-color: #f8f9fa;
         }
+
+        /* 弹出层样式 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        .popup-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-header {
+            background: linear-gradient(90deg, #2c3e50, #4a6491);
+            color: white;
+            padding: 9px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .popup-body {
+            padding: 25px;
+        }
+
+        /* 仓库布局图样式 */
+        .warehouse-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .warehouse-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%; /* 4:3 比例 */
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* 仓库区域 - 5个区域 - 使用百分比定位 */
+        .zone {
+            position: absolute;
+            border: 3px solid;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .zone:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .zone-label {
+            font-weight: bold;
+            font-size: 2.5vw; /* 使用视窗单位 */
+            margin-bottom: 5px;
+            white-space: nowrap;
+        }
+
+        .zone-info {
+            font-size: 1.8vw;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        /* A区 - 左上角 */
+        .zone-a {
+            top: 3%;
+            left: 3%;
+            width: 19%;
+            height: 87%;
+            background: rgba(52, 152, 219, 0.15);
+            border-color: #3498db;
+            color: #2980b9;
+        }
+
+        /* B区 - 左中 */
+        .zone-b {
+            top: 50%;
+            left: 31%;
+            width: 37%;
+            height: 18%;
+            background: rgba(46, 204, 113, 0.15);
+            border-color: #2ecc71;
+            color: #27ae60;
+        }
+
+        /* C区 - 左下角 */
+        .zone-c {
+            top: 78%;
+            left: 31%;
+            width: 46%;
+            height: 18%;
+            background: rgba(155, 89, 182, 0.15);
+            border-color: #9b59b6;
+            color: #8e44ad;
+        }
+
+        /* D区 - 右上角 */
+        .zone-d {
+            top: 3%;
+            left: 31%;
+            width: 16%;
+            height: 37%;
+            background: rgba(241, 196, 15, 0.15);
+            border-color: #f1c40f;
+            color: #f39c12;
+        }
+
+        /* E区 - 右中 */
+        .zone-e {
+            top: 50%;
+            right: 8%;
+            width: 15%;
+            height: 46%;
+            background: rgba(231, 76, 60, 0.15);
+            border-color: #e74c3c;
+            color: #c0392b;
+        }
+
+
+        /* 通道 - 3条垂直路，2条水平路 - 使用百分比 */
+
+        /* 垂直通道1 - 左边 */
+        .aisle-vertical-1 {
+            position: absolute;
+            background: #ecf0f1;
+            border: 2px dashed #bdc3c7;
+            width: 8.5%;
+            height: 96%;
+            top: 4%;
+            left: 22%;
+            box-sizing: border-box;
+        }
+
+        /* 垂直通道2 - 中间 */
+        .aisle-vertical-2 {
+            position: absolute;
+            background: #ecf0f1;
+            border: 2px dashed #bdc3c7;
+            width: 9%;
+            height: 20%;
+            top: 49%;
+            left: 67.75%;
+            box-sizing: border-box;
+        }
+
+        /* 垂直通道3 - 右边 */
+        .aisle-vertical-3 {
+            position: absolute;
+            background: #ecf0f1;
+            border: 2px dashed #bdc3c7;
+            width: 7.5%;
+            height: 63%;
+            top: 40%;
+            right: 0%;
+            box-sizing: border-box;
+        }
+
+        /* 水平通道1 - 上方 */
+        .aisle-horizontal-1 {
+            position: absolute;
+            background: #ecf0f1;
+            border: 2px dashed #bdc3c7;
+            width: 62%;
+            height: 10%;
+            top: 40%;
+            left: 30.5%;
+            box-sizing: border-box;
+        }
+
+        /* 水平通道2 - 下方 */
+        .aisle-horizontal-2 {
+            position: absolute;
+            background: #ecf0f1;
+            border: 2px dashed #bdc3c7;
+            width: 47%;
+            height: 10%;
+            top: 68%;
+            left: 30%;
+            box-sizing: border-box;
+        }
+
+        /* 出入口 - 左边一个，右边一个 - 使用百分比 */
+        .entrance {
+            position: absolute;
+            background: #2ecc71;
+            border: 2px solid #27ae60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2vw;
+            box-sizing: border-box;
+        }
+
+        /* 左边出入口 */
+        .entrance-left {
+            width: 7.5%;
+            height: 5%;
+            bottom: 0%;
+            left: 22.25%;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* 右边出入口 */
+        .entrance-right {
+            width: 7.5%;
+            height: 5%;
+            bottom: 0%;
+            right: 0.25%;
+            border-radius: 8px 8px 0 0;
+        }
+
+        /* 办公室 */
+        .office {
+            position: absolute;
+            background: rgba(149, 165, 166, 0.2);
+            border: 2px solid #7f8c8d;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.5vw;
+            box-sizing: border-box;
+        }
+
+        .office-room {
+            width: 14%;
+            height: 8%;
+            top: 91%;
+            left: 8%;
+            background: rgba(52, 152, 219, 0.1);
+            border-color: #3498db;
+        }
+
+        /* 信息提示 */
+        .zone-tooltip {
+            display: none;
+            position: absolute;
+            background: rgba(44, 62, 80, 0.95);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 100;
+            max-width: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .tooltip-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #3498db;
+        }
+
+        /* ====== 响应式调整字体大小 ====== */
+        @media (max-width: 1800px) {
+            .zone-label {
+                font-size: 20px; /* 当屏幕小于1200px时，使用固定20px */
+            }
+
+            .zone-info {
+                font-size: 14px; /* 当屏幕小于1200px时，使用固定14px */
+            }
+
+            .office {
+                font-size: 14px;
+            }
+
+            .entrance {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .zone-label {
+                font-size: 16px;
+            }
+
+            .zone-info {
+                font-size: 12px;
+            }
+
+            .office {
+                font-size: 12px;
+            }
+
+            .entrance {
+                font-size: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .zone-label {
+                font-size: 14px;
+            }
+
+            .zone-info {
+                font-size: 11px;
+            }
+
+            .office {
+                font-size: 11px;
+            }
+
+            .entrance {
+                font-size: 5px;
+            }
+
+            /* 在超小屏幕上，隐藏详细信息，只显示区域字母 */
+            .zone-info {
+                display: none;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .zone-label {
+                font-size: 12px;
+            }
+
+            .office {
+                font-size: 6px;
+            }
+
+            .entrance {
+                font-size: 3px;
+            }
+        }
+
+
+    /* 1. 使用flex布局让按钮和语言切换器在同一行 */
+    .container {
+        position: relative;
+    }
+
+    /* 创建一个顶部工具栏 */
+    .container::before {
+        content: '';
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+        height: 50px;
+    }
+
+    /* 2. More按钮 - 固定在左边 */
+    #moreBtn {
+        position: absolute;
+        left: 0px;
+        top: 15px;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 40px;
+        width: 90px;
+        z-index: 100;
+        white-space: nowrap;
+        border: 2px solid #2980b9;
+    }
+
+    /* 3. 语言切换器 - 固定在右边 */
+    .lang-container {
+        position: absolute;
+        right: 0px;
+        top: 15px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        height: 44px;
+    }
+
+    /* 4. 调整语言按钮高度 */
+    .lang-btn {
+        height: 40px !important;
+        min-height: 40px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+        padding: 10px 16px !important;
+        line-height: 1 !important;
+    }
+
+    /* 5. 为header添加足够的上边距，避免重叠 */
+    .header {
+        margin-top: 0px !important;
+        clear: both;
+    }
+
+    /* 6. 按钮效果 */
+    #moreBtn:hover {
+        background: linear-gradient(135deg, #2980b9, #1c6692);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    #moreBtn:active {
+        transform: translateY(0);
+    }
+
+    /* 7. 按钮图标 */
+    #moreBtn::before {
+        content: "🗺️";
+        font-size: 1rem;
+    }
+
+    /* 8. 小屏幕适配 */
+    @media (max-width: 400px) {
+        #moreBtn {
+            left: 0px;
+            top: 10px;
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            height: 40px;
+        }
+
+        .lang-container {
+            right: 10px;
+            top: 10px;
+            height: 40px;
+        }
+
+        .lang-btn {
+            padding: 8px 12px !important;
+            font-size: 0.85rem !important;
+            height: 36px !important;
+            min-height: 36px !important;
+        }
+
+    }
     </style>
 </head>
 <body>
+
+    <!-- 仓库布局弹出层 -->
+    <div id="popupOverlay" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>仓库布局图</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+
+            <div class="popup-body">
+                <div class="warehouse-container">
+                    <!-- 仓库区域 -->
+                    <div class="zone zone-a" data-zone="A">
+                        <div class="zone-label">D区</div>
+                        <div class="zone-info">管道类</div>
+                    </div>
+
+                    <div class="zone zone-b" data-zone="B">
+                        <div class="zone-label">B区</div>
+                        <div class="zone-info">管道类</div>
+                    </div>
+
+                    <div class="zone zone-c" data-zone="C">
+                        <div class="zone-label">A区</div>
+                        <div class="zone-info">钢板类</div>
+                    </div>
+
+                    <div class="zone zone-d" data-zone="D">
+                        <div class="zone-label">C区</div>
+                        <div class="zone-info">槽钢类</div>
+                    </div>
+
+                    <div class="zone zone-e" data-zone="E">
+                        <div class="zone-label">F区</div>
+                        <div class="zone-info">管道类</div>
+                    </div>
+
+
+                    <!-- 通道 - 3条垂直路 -->
+                    <div class="aisle-vertical-1"></div>
+                    <div class="aisle-vertical-2"></div>
+                    <div class="aisle-vertical-3"></div>
+
+                    <!-- 通道 - 2条水平路 -->
+                    <div class="aisle-horizontal-1"></div>
+                    <div class="aisle-horizontal-2"></div>
+
+                    <!-- 出入口 -->
+                    <div class="entrance entrance-left">
+                        <div>出入口</div>
+                    </div>
+
+                    <div class="entrance entrance-right">
+                        <div>出入口</div>
+                    </div>
+
+                    <!-- 办公室 -->
+                    <div class="office office-room">
+                        <div>办公室</div>
+                    </div>
+
+                    <!-- 信息提示 -->
+                    <div id="zoneTooltip" class="zone-tooltip">
+                        <div class="tooltip-title" id="tooltipTitle">A区</div>
+                        <div id="tooltipContent">点击查看详细信息</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
+
+        <button id="moreBtn">Peta</button>
         <!-- 语言切换器 - 完全独立的块，在标题栏外面 -->
         <div class="lang-container">
             <div class="language-switcher">
@@ -707,7 +1267,7 @@
                 tableLocation: "Lokasi",
                 tableName: "Nama Barang",
                 tableDesc:"Deskripsi Produk",
-                footerText: "© 2026 Bisa Dicari, Tepat Ditemukan",
+                footerText: "© 2026 Pribadi",
                 sapHint: "Masukkan kode SAP untuk pencarian tepat",
                 locationHint: "Masukkan kata kunci lokasi untuk pencarian samar (contoh: A, B01)"
             }
@@ -1002,6 +1562,56 @@
         document.addEventListener('submit', function(e) {
             e.preventDefault();
         });
+
+        // DOM 元素
+        const moreBtn = document.getElementById('moreBtn');
+        const popupOverlay = document.getElementById('popupOverlay');
+        const closeBtn = document.querySelector('.close-btn');
+        const zones = document.querySelectorAll('.zone');
+        const zoneTooltip = document.getElementById('zoneTooltip');
+        const tooltipTitle = document.getElementById('tooltipTitle');
+        const tooltipContent = document.getElementById('tooltipContent');
+
+        // 打开弹出层
+        moreBtn.addEventListener('click', function() {
+            popupOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // 关闭弹出层
+        closeBtn.addEventListener('click', function() {
+            popupOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // 点击外部关闭
+        popupOverlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // 防止工具提示超出屏幕
+        document.addEventListener('mousemove', function(e) {
+            if (zoneTooltip.style.display === 'block') {
+                const tooltipWidth = zoneTooltip.offsetWidth;
+                const x = e.clientX;
+                const windowWidth = window.innerWidth;
+
+                if (x + tooltipWidth > windowWidth - 20) {
+                    zoneTooltip.style.left = (windowWidth - tooltipWidth - 20) + 'px';
+                }
+            }
+        });
+
+        // ESC键关闭弹出层
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && popupOverlay.style.display === 'block') {
+                popupOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
     </script>
 </body>
 
@@ -1010,4 +1620,40 @@
 
 
 
-
+<script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host +
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' +
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script>
