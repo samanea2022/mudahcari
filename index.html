@@ -1094,7 +1094,7 @@
         <section class="data-status-section">
             <i class="fas fa-database"></i>
             <span data-i18n="updateText">数据最后更新于: </span>
-            <strong id="lastUpdateTime">2025-02-14 18:41</strong>
+            <strong id="lastUpdateTime">2025-4-3 19:52</strong>
         </section>
 
         <!-- 搜索区域 -->
@@ -1178,6 +1178,7 @@
                 </div>
 
                 <!-- 查询结果表格 -->
+                <!-- 查询结果表格 -->
                 <table class="results-table" id="resultsTable" style="display: none;">
                     <thead>
                         <tr>
@@ -1187,6 +1188,12 @@
                             <th data-i18n="tableLocation">存放位置</th>
                             <th data-i18n="tableName">货物名称</th>
                             <th data-i18n="tableDesc">产品描述</th>
+                            <th data-i18n="tableWeight">单重(Kg)</th>
+                            <th data-i18n="tableBuyer">申购人</th>
+                            <th data-i18n="tableRemark">备注</th>
+                            <th data-i18n="tableLock">锁库</th>
+                            <th data-i18n="tableManual">手工账</th>
+                            <th data-i18n="tableSystem">系统账</th>
                         </tr>
                     </thead>
                     <tbody id="resultsBody">
@@ -1211,6 +1218,12 @@
         const translations = {
             zh: {
                 title: "仓库货位速查",
+                tableWeight: "单重(Kg)",
+                tableBuyer: "申购人",
+                tableRemark: "备注",
+                tableLock: "锁库",
+                tableManual: "手工账",
+                tableSystem: "系统账",
                 subtitle: "快速查询货物位置和库存信息",
                 updateText: "数据最后更新于: ",
                 sapSegment: "SAP编码",
@@ -1244,6 +1257,12 @@
                 title: "Cepat Cari Lokasi",
                 subtitle: "Cari lokasi dan informasi stok barang",
                 updateText: "Data diperbarui: ",
+                tableWeight: "Berat per(Kg)",
+                tableBuyer: "Pemohon",
+                tableRemark: "Catatan",
+                tableLock: "Locked",
+                tableManual: "Stok Manual",
+                tableSystem: "Stok Sistem",
                 sapSegment: "Kode SAP",
                 locationSegment: "Kata Kunci",
                 clearButton: "Hapus",
@@ -1476,7 +1495,7 @@
                     // SAP编码查询
                     const response = await supabaseClient
                         .from('products')
-                        .select('sap_code, product_name, product_description, unit, location, quantity')
+                        .select('sap_code, product_name, product_description, unit, location, quantity, weight_per_unit, buyer, remark, lock_stock, manual_stock, system_stock')
                         .eq('sap_code', query.toUpperCase());
                     data = response.data;
                     error = response.error;
@@ -1484,7 +1503,7 @@
                     // 库位关键字查询
                     const response = await supabaseClient
                         .from('products')
-                        .select('sap_code, product_name, product_description, unit, location, quantity')
+                        .select('sap_code, product_name, product_description, unit, location, quantity, weight_per_unit, buyer, remark, lock_stock, manual_stock, system_stock')
                         .ilike('location', `%${query}%`);
                     data = response.data;
                     error = response.error;
@@ -1538,21 +1557,40 @@
         }
 
         // 渲染结果
+        // 渲染结果函数
+        // 渲染结果函数 - 约第647行
         function renderResults(results) {
             resultsBody.innerHTML = '';
             results.forEach(item => {
                 const row = document.createElement('tr');
                 row.classList.add('fade-in');
                 row.innerHTML = `
-                    <td class="sap-code">${item.sap_code || ''}</td>
-                    <td>${item.unit || ''}</td>
-                    <td class="quantity">${item.quantity || 0}</td>
-                    <td><span class="location">${item.location || ''}</span></td>
-                    <td>${item.product_name || ''}</td>
-                    <td>${item.product_description || ''}</td>
+                    <td class="sap-code">${escapeHtml(item.sap_code) || ''}</td>
+                    <td>${escapeHtml(item.unit) || ''}</td>
+                    <td class="quantity">${item.quantity ?? 0}</td>
+                    <td><span class="location">${escapeHtml(item.location) || ''}</span></td>
+                    <td>${escapeHtml(item.product_name) || ''}</td>
+                    <td>${escapeHtml(item.product_description) || ''}</td>
+                    <td>${item.weight_per_unit ?? ''}</td>
+                    <td>${escapeHtml(item.buyer) || ''}</td>
+                    <td>${escapeHtml(item.remark) || ''}</td>
+                    <td>${escapeHtml(item.lock_stock) || ''}</td>
+                    <td>${item.manual_stock ?? ''}</td>
+                    <td>${item.system_stock ?? ''}</td>
                 `;
                 resultsBody.appendChild(row);
             });
+        }
+
+        // 添加防XSS攻击的辅助函数
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
 
         // 页面加载初始化
